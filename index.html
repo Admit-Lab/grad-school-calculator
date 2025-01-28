@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grad School Acceptance Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Grad School Acceptance Calculator</h1>
+        <div class="tab-container">
+            <div class="tab active" id="tab-academic" onclick="showTab('academic')">Academic Background</div>
+            <div class="tab" id="tab-experience" onclick="showTab('experience')">Experience</div>
+            <div class="tab" id="tab-personal" onclick="showTab('personal')">Personal Qualities</div>
+             <div class="tab" id="tab-other" onclick="showTab('other')">Other Factors</div>
+            <div class="tab" id="tab-results" onclick="showTab('results')">Results</div>
+        </div>
+
+        <div class="tab-content" id="academic-content">
+           <h2>Academic Background</h2>
+           <div class="input-group">
+              <label for="gpa">GPA (4.0 Scale):</label>
+              <input type="number" id="gpa" min="0" max="4.0" step="0.01">
+           </div>
+           <div class="input-group">
+              <label for="majorGpa">Major GPA:</label>
+              <input type="number" id="majorGpa" min="0" max="4.0" step="0.01">
+           </div>
+            <div class="input-group">
+            <label for="courseRigor">Course Rigor (1-5):</label>
+             <input type="number" id="courseRigor" min="1" max="5" step="1">
+            </div>
+            <div class="input-group">
+              <label for="institutionTier">Institution Tier (1-5):</label>
+             <input type="number" id="institutionTier" min="1" max="5" step="1">
+            </div>
+          </div>
+
+        <div class="tab-content" id="experience-content" style="display:none;">
+            <h2>Experience</h2>
+           <div class="input-group">
+              <label for="workExperience">Years of Work Experience:</label>
+              <input type="number" id="workExperience" min="0" step="1">
+           </div>
+            <div class="input-group">
+              <label for="internships">Number of Internships:</label>
+              <input type="number" id="internships" min="0" step="1">
+           </div>
+           <div class="input-group">
+              <label for="leadership">Leadership Positions:</label>
+              <input type="number" id="leadership" min="0" step="1">
+           </div>
+          </div>
+
+         <div class="tab-content" id="personal-content" style="display:none;">
+             <h2>Personal Qualities</h2>
+             <div class="input-group">
+                 <label for="sopScore">Statement of Purpose (1-5):</label>
+                 <input type="number" id="sopScore" min="1" max="5" step="1">
+             </div>
+             <div class="input-group">
+                 <label for="lorScore">Letters of Recommendation (Average Score 1-5):</label>
+                <input type="number" id="lorScore" min="1" max="5" step="1">
+             </div>
+             <div class="input-group">
+                <label for="fitScore">Program Fit (1-5):</label>
+                <input type="number" id="fitScore" min="1" max="5" step="1">
+            </div>
+           </div>
+        <div class="tab-content" id="other-content" style="display:none;">
+           <h2>Other Factors</h2>
+             <div class="input-group">
+                 <label for="awards">Awards & Honors:</label>
+                 <input type="number" id="awards" min="0" step="1">
+             </div>
+             <div class="input-group">
+                 <label for="extracurriculars">Extracurricular Involvement:</label>
+                 <input type="number" id="extracurriculars" min="0" step="1">
+            </div>
+          </div>
+
+        <div class="tab-content" id="results-content" style="display:none;">
+            <h2>Results</h2>
+            <p>Estimated Acceptance Score: <span id="acceptanceScore"></span></p>
+             <p>Disclaimer: This score is an estimate, not a guarantee of acceptance. Each program uses a variety of factors in its own specific way. </p>
+           <button onclick="calculateScore()">Calculate</button>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
