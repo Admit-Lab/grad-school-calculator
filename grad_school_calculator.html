@@ -15,7 +15,7 @@
             const statementQuality = parseInt(document.getElementById('statement-quality').value);
             const recommendations = parseInt(document.getElementById('recommendations').value);
 
-            // Log values to debug
+            console.log('Inputs captured:');
             console.log({ gpa, testScore, experience, statementQuality, recommendations });
 
             if (isNaN(gpa) || isNaN(testScore) || isNaN(experience) || isNaN(statementQuality) || isNaN(recommendations)) {
@@ -25,6 +25,8 @@
 
             let acceptanceChance = (gpa * 20) + (testScore * 0.2) + (experience * 5) + (statementQuality * 10) + (recommendations * 10);
             acceptanceChance = Math.min(acceptanceChance, 100);
+
+            console.log('Acceptance chance calculated:', acceptanceChance);
 
             let feedback = '';
             if (acceptanceChance > 80) {
@@ -37,6 +39,9 @@
 
             document.getElementById('acceptance-chance').innerText = `Estimated Acceptance Chance: ${acceptanceChance.toFixed(2)}%`;
             document.getElementById('recommendations').innerText = feedback;
+
+            console.log('Feedback:', feedback);
+
             document.getElementById('result').classList.remove('hidden');
         }
     </script>
