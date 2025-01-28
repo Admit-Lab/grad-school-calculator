@@ -9,25 +9,40 @@
     </style>
     <script>
         function calculateAcceptance() {
-            const gpa = parseFloat(document.getElementById('gpa').value);
-            const testScore = parseFloat(document.getElementById('test-score').value);
-            const experience = parseInt(document.getElementById('experience').value);
-            const statementQuality = parseInt(document.getElementById('statement-quality').value);
-            const recommendations = parseInt(document.getElementById('recommendations').value);
+            // Retrieve and validate inputs
+            const gpa = parseFloat(document.getElementById('gpa').value) || 0;
+            const testScore = parseFloat(document.getElementById('test-score').value) || 0;
+            const experience = parseInt(document.getElementById('experience').value) || 0;
+            const statementQuality = parseInt(document.getElementById('statement-quality').value) || 0;
+            const recommendations = parseInt(document.getElementById('recommendations').value) || 0;
 
-            console.log('Inputs captured:');
-            console.log({ gpa, testScore, experience, statementQuality, recommendations });
+            // Debug: Log inputs to verify correctness
+            console.log('Inputs captured:', { gpa, testScore, experience, statementQuality, recommendations });
 
-            if (isNaN(gpa) || isNaN(testScore) || isNaN(experience) || isNaN(statementQuality) || isNaN(recommendations)) {
-                alert('Please fill out all fields correctly.');
+            // Validate inputs and show an error if any field is empty or invalid
+            if (
+                gpa < 0 || gpa > 4 ||
+                testScore < 0 || testScore > 340 ||
+                experience < 0 ||
+                statementQuality < 1 || statementQuality > 10 ||
+                recommendations < 0
+            ) {
+                alert('Please provide valid inputs. Check the ranges for each field.');
                 return;
             }
 
-            let acceptanceChance = (gpa * 20) + (testScore * 0.2) + (experience * 5) + (statementQuality * 10) + (recommendations * 10);
+            // Calculate acceptance chance with adjusted weights
+            let acceptanceChance = 
+                (gpa * 25) +       // GPA contributes significantly
+                (testScore * 0.15) + // Test score contributes moderately
+                (experience * 5) +   // Experience adds small increments
+                (statementQuality * 8) + // Statement quality is important
+                (recommendations * 10);  // Recommendations carry weight
+
+            // Cap the acceptance chance at 100%
             acceptanceChance = Math.min(acceptanceChance, 100);
 
-            console.log('Acceptance chance calculated:', acceptanceChance);
-
+            // Provide feedback based on the calculated chance
             let feedback = '';
             if (acceptanceChance > 80) {
                 feedback = 'Your profile looks strong! Focus on refining your personal statement and preparing for interviews.';
@@ -37,12 +52,14 @@
                 feedback = 'It may be worth focusing on raising your GPA or gaining additional experience before applying.';
             }
 
+            // Update the results section
             document.getElementById('acceptance-chance').innerText = `Estimated Acceptance Chance: ${acceptanceChance.toFixed(2)}%`;
             document.getElementById('recommendations').innerText = feedback;
-
-            console.log('Feedback:', feedback);
-
             document.getElementById('result').classList.remove('hidden');
+
+            // Debug: Log the calculated acceptance chance and feedback
+            console.log('Calculated Acceptance Chance:', acceptanceChance);
+            console.log('Feedback:', feedback);
         }
     </script>
 </head>
@@ -51,11 +68,11 @@
         <h1>Graduate School Acceptance Calculator</h1>
         <form id="acceptance-calculator" style="display: grid; gap: 10px;">
             <div>
-                <label for="gpa">Undergraduate GPA</label><br>
+                <label for="gpa">Undergraduate GPA (0.0 - 4.0)</label><br>
                 <input type="number" step="0.01" min="0" max="4" id="gpa" placeholder="e.g., 3.7">
             </div>
             <div>
-                <label for="test-score">Standardized Test Score</label><br>
+                <label for="test-score">Standardized Test Score (0 - 340)</label><br>
                 <input type="number" id="test-score" placeholder="e.g., 320">
             </div>
             <div>
@@ -72,7 +89,7 @@
             </div>
             <button type="button" onclick="calculateAcceptance()">Calculate</button>
         </form>
-        <div id="result" class="hidden">
+        <div id="result" class="hidden" style="margin-top: 20px; padding: 10px; border: 1px solid #eee; border-radius: 5px; background-color: #f9f9f9;">
             <h2>Your Results</h2>
             <p id="acceptance-chance"></p>
             <p id="recommendations"></p>
