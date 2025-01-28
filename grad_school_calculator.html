@@ -19,7 +19,7 @@
             // Debug: Log inputs to verify correctness
             console.log('Inputs captured:', { gpa, testScore, experience, statementQuality, recommendations });
 
-            // Validate inputs and show an error if any field is empty or invalid
+            // Validate inputs and show an error if any field is invalid
             if (
                 gpa < 0 || gpa > 4 ||
                 testScore < 0 || testScore > 340 ||
@@ -31,13 +31,13 @@
                 return;
             }
 
-            // Calculate acceptance chance with adjusted weights
+            // Calculate acceptance chance with refined weights
             let acceptanceChance = 
-                (gpa * 25) +       // GPA contributes significantly
-                (testScore * 0.15) + // Test score contributes moderately
+                (gpa * 20) +       // GPA contributes significantly
+                (testScore * 0.1) + // Test score contributes moderately
                 (experience * 5) +   // Experience adds small increments
-                (statementQuality * 8) + // Statement quality is important
-                (recommendations * 10);  // Recommendations carry weight
+                (statementQuality * 5) + // Statement quality has a moderate influence
+                (recommendations * 8);  // Recommendations carry meaningful weight
 
             // Cap the acceptance chance at 100%
             acceptanceChance = Math.min(acceptanceChance, 100);
