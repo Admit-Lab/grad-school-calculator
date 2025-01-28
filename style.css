@@ -66,12 +66,3 @@ h1, h2 {
     margin-top: 20px;
     text-align: center;
 }
-/* Image Styling */
-
-.header-image {
-display: block;
-max-width: 100%; /* Make it responsive */
-height: auto;
-margin: 10px auto 20px; /* Add spacing around image*/
-border-radius: 8px; /* Optional: Rounded corners */
-}
