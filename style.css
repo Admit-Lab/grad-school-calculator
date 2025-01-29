@@ -1,68 +1,105 @@
+/* Mobile-first viewport setup */
+meta[name="viewport"] {
+  content: width=device-width, initial-scale=1.0;
+}
+
+/* Base styles */
 body {
-    font-family: sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
+  font-family: sans-serif;
+  margin: 20px;
+  background-color: #f4f4f4;
 }
 
 .container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%; /* Changed from 600px for better mobile fit */
+  margin: 0 auto;
 }
 
+/* Responsive iframe container */
+.iframe-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  margin: 20px 0;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .iframe-container {
+    padding-top: 75%; /* Taller aspect ratio for mobile */
+  }
+}
+
+/* Existing styles preserved below */
 h1, h2 {
-    color: #333;
-    text-align: center;
+  color: #333;
+  text-align: center;
 }
 
 .tab-container {
-    display: flex;
-    margin-bottom: 20px;
-    justify-content: center;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
 }
 
 .tab {
-    padding: 10px 15px;
-    background-color: #e0e0e0;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 5px 5px 0 0;
-    margin-right: 5px;
+  padding: 10px 15px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px 5px 0 0;
+  margin-right: 5px;
 }
 
 .tab.active {
-    background-color: #ddd;
-    border-bottom: none;
+  background-color: #ddd;
+  border-bottom: none;
 }
 
 .tab-content {
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 0 0 5px 5px;
-    display: none; /* Hidden by default */
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  display: none;
 }
 
 .input-group {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-group label {
-    margin-bottom: 5px;
-    color: #555;
+  margin-bottom: 5px;
+  color: #555;
 }
 
 .input-group input[type="number"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .results {
-    margin-top: 20px;
-    text-align: center;
+  margin-top: 20px;
+  text-align: center;
 }
